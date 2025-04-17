@@ -2,7 +2,13 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-
+.vs/
+.vs2019/
+.idea/
+*.user
+*.suo
+bin/
+obj/
 
 ### IntelliJ IDEA ###
 .idea/

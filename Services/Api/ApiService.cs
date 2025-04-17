@@ -18,8 +18,6 @@ namespace PlanSwiftApi.Services
         public ManualResetEvent Bucle0Completed { get; private set; }
 
 
-
-
         public ApiService()
         {
             Bucle0Completed = new ManualResetEvent(false);
@@ -42,16 +40,19 @@ namespace PlanSwiftApi.Services
                     else
                     {
                         Thread.Sleep(10000); // optimize memory and run search of PlanSwift //
-                        Bucle0Completed.Set();
-                        Console.WriteLine("find PlanSwift"); // Verify search in console // 
+                        Console.WriteLine("find PlanSwift"); // Verify search in console //
+
                     }
                 }
                 catch (Exception ex)
                 {
-                    Bucle0Completed.Set(); // Avoid crashes if the app crashes //
                     Console.WriteLine(ex.Message);
                 }
+            }
 
+            if (token.IsCancellationRequested) // Optimization and prevent errors //
+            {
+                Bucle0Completed.Set();
 
             }
         }
@@ -60,6 +61,7 @@ namespace PlanSwiftApi.Services
         public void IsRunCurrent(CancellationToken token)
         {
             Bucle0Completed.WaitOne(); // Wait to bucle 0 is close or completed //
+
 
             while (!token.IsCancellationRequested)
             {
@@ -72,8 +74,8 @@ namespace PlanSwiftApi.Services
 
                     Thread.Sleep(10000); // wait time for the optimize that program //
 
-                    
 
+                    
                 }
                 catch (Exception ex)
                 {

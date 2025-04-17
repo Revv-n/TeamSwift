@@ -53,6 +53,7 @@ namespace PlanSwiftApi.Config
         public void CleanMemory()
         {
             apiService.CancellationTokenSource.Cancel();
+
             Console.WriteLine("cerrando");
         }
     }

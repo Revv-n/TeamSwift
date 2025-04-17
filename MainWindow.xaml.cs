@@ -118,7 +118,9 @@ namespace PlanSwiftApi
 
         private void OnCloseWIndow(object sender, CancelEventArgs e) 
         {
-            _config.CleanMemory();
+            
+            _config.CleanMemory(); 
+
             
         }
 
