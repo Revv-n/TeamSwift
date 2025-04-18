@@ -21,6 +21,28 @@ namespace PlanSwiftApi.ApiConfigs
 
             Thread thread1 = new Thread(() => _apiService.IsRunCurrent(_apiService.CancellationTokenSource.Token));
             thread1.Start();
+
+            _apiService.OnPlanSwiftClose += () =>
+            {
+                _apiService.CancellationTokenSource.Cancel();
+                _apiService.CancellationTokenSource = new CancellationTokenSource();
+
+                Thread threadReconect0 = new Thread(() =>
+                {
+                    _apiService.PlanSwiftApiConect(_apiService.CancellationTokenSource.Token);
+                    if(_apiService.Loaded == true)
+                    {
+                        Thread threadReconect1 = new Thread(() =>
+                        {
+                            _apiService.IsRunCurrent(_apiService.CancellationTokenSource.Token);
+                        });
+                        threadReconect1.Start();
+                    }
+                });
+                threadReconect0.Start();
+
+            };
+
         }
 
         public void CleanMemory()

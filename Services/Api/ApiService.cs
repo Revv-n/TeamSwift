@@ -24,6 +24,8 @@ namespace PlanSwiftApi.Services
         public PlanSwift PlanSwift => _planSwift; // PlanSwift api Class Public //
         public ManualResetEvent Bucle0Completed { get; private set; }
 
+        public event Action OnPlanSwiftClose;
+
 
         public ApiService()
         {
@@ -74,16 +76,25 @@ namespace PlanSwiftApi.Services
             {
                 try
                 {
-                    _planSwift.IsLoaded(); // verify PlanSwift is run current
-                    _loaded = true;
+
+                    if(_planSwift != null && _planSwift.IsLoaded())
+                    {
+                         // verify PlanSwift is run current
+                        _loaded = true;
+                    }
+
 
                     Thread.Sleep(10000); // wait time for the optimize that program //
 
                 }
                 catch (Exception ex)
                 {
+
+                    OnPlanSwiftClose?.Invoke();
                     Console.WriteLine($"{ex.Message} PlanSwift is close"); // Alert PlanSwift are closed //
                     Thread.Sleep(5000); // Optimize again //
+                    return false;
+
                 }
             }return _loaded;
 
