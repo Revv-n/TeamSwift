@@ -4,7 +4,7 @@ using System.Windows.Documents;
 
 namespace PlanSwiftApi.Services
 {
-    public interface IJobsManager
+    public interface IFilesManager
     {
 
 

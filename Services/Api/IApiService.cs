@@ -6,8 +6,7 @@ namespace PlanSwiftApi.Services
     public interface IApiService
     {
         void PlanSwiftApiConect(CancellationToken token);
-        void IsRunCurrent(CancellationToken token);
+        bool IsRunCurrent(CancellationToken token);
         CancellationTokenSource CancellationTokenSource { get; set; }
-        PlanSwift PlanSwiftApi { get; }
     }
 }

@@ -9,6 +9,7 @@ using PlanSwiftApi.Services;
 using PlanSwiftApi.Views;
 using PlanSwiftApi.Config;
 using PlanSwiftApi.Config.WindowsConfig;
+using PlanSwiftApi.ApiConfigs;
 
 
 namespace PlanSwiftApi
@@ -25,9 +26,11 @@ namespace PlanSwiftApi
 
             // Registrar dependencias
             services.AddSingleton<DependencyManager>();
-            services.AddSingleton<JobsManager>();
+            services.AddSingleton<FilesManager>();
             services.AddTransient<HomeView>();
             services.AddSingleton<MainWindow>();
+            services.AddSingleton<ApiService>();
+            services.AddSingleton<ApiConfig>();
 
             ServiceProvider = services.BuildServiceProvider();
 

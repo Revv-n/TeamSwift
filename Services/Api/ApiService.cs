@@ -5,16 +5,23 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using PlanSwift9;
 using PlanSwiftApi.Config;
-using System.Security.Cryptography.X509Certificates;
+using System.Security.Cryptography.X509Certificates; 
 
 
 namespace PlanSwiftApi.Services
 {
     public class ApiService : IApiService
     {
+
+        // Private variables //
+
+        private PlanSwift _planSwift; // PlanSwift api Class Private //
+        private bool _loaded = false;
+
+        // public variables //
         public CancellationTokenSource CancellationTokenSource { get; set; } // Cancellation tokens for bucles //
-        public bool Loaded { get; private set; } // flag PlanSwift is conect //
-        public PlanSwift PlanSwiftApi { get; private set; } // PlanSwift api Class //
+        public bool Loaded => _loaded; // flag PlanSwift is conect //
+        public PlanSwift PlanSwift => _planSwift; // PlanSwift api Class Public //
         public ManualResetEvent Bucle0Completed { get; private set; }
 
 
@@ -32,7 +39,7 @@ namespace PlanSwiftApi.Services
                     if (Process.GetProcessesByName("PlanSwift").Length > 0) // seraching the PlanSwift proces to verify planSwift is open //
                     {
                         Thread.Sleep(5000); // optimize Memory and correctly opening PlanSwift whaiting ones seconds //
-                        PlanSwiftApi = new PlanSwift(); // Stablish Conection //
+                        _planSwift = new PlanSwift(); // Stablish Conection //
                         Console.WriteLine("PlanSwift Conected"); // verify in console //
                         Bucle0Completed.Set(); // Bucle is ok and finish, flag to bucle1 start //
                         break;
@@ -58,7 +65,7 @@ namespace PlanSwiftApi.Services
         }
 
         // PlanSwift is open and Current runing,  if the program closes alert a the program that as closed //
-        public void IsRunCurrent(CancellationToken token)
+        public bool IsRunCurrent(CancellationToken token)
         {
             Bucle0Completed.WaitOne(); // Wait to bucle 0 is close or completed //
 
@@ -67,22 +74,20 @@ namespace PlanSwiftApi.Services
             {
                 try
                 {
-                    PlanSwiftApi.IsLoaded(); // verify PlanSwift is run current
-                    Loaded = true;
-
-                    
+                    _planSwift.IsLoaded(); // verify PlanSwift is run current
+                    _loaded = true;
 
                     Thread.Sleep(10000); // wait time for the optimize that program //
 
-
-                    
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine($"{ex.Message} PlanSwift is close"); // Alert PlanSwift are closed //
                     Thread.Sleep(5000); // Optimize again //
                 }
-            }
+            }return _loaded;
+
         }
+
     }
 }

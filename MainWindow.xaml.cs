@@ -62,8 +62,10 @@ namespace PlanSwiftApi
             var windowHelper = new WindowInteropHelper(this);
             var hwnd = windowHelper.Handle;
 
-            var accent = new AccentPolicy();
-            accent.AccentState = AccentState.ACCENT_ENABLE_BLURBEHIND;
+            var accent = new AccentPolicy
+            {
+                AccentState = AccentState.ACCENT_ENABLE_BLURBEHIND
+            };
 
             var accentStructSize = Marshal.SizeOf(accent);
             var accentPtr = Marshal.AllocHGlobal(accentStructSize);
@@ -119,7 +121,7 @@ namespace PlanSwiftApi
         private void OnCloseWIndow(object sender, CancelEventArgs e) 
         {
             
-            _config.CleanMemory(); 
+            _config.ApiConfig.CleanMemory(); 
 
             
         }

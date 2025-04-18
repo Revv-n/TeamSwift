@@ -2,59 +2,46 @@
 using System.Threading;
 using PlanSwiftApi.Services;
 using PlanSwift9;
+using PlanSwiftApi.ApiConfigs;
+
 
 namespace PlanSwiftApi.Config
 {
     public class DependencyManager
     {
-        private readonly IApiService apiService;
+        private readonly ApiService _apiService;
 
-        private readonly JobsManager _jobsmanager;
-        private readonly PlanSwift _planSwift;
+        private readonly FilesManager _jobsManager;
 
-
-        public JobsManager JobsManager => _jobsmanager;
-        public PlanSwift PlanSwift => _planSwift;
+        private readonly ApiConfig _apiConfig;
 
 
+        public FilesManager JobsManager => _jobsManager;
+
+        public ApiService ApiService => _apiService;
+
+        public ApiConfig ApiConfig => _apiConfig;
+        
 
 
 
 
-        public DependencyManager(JobsManager jobsManager)
+
+
+        public DependencyManager(FilesManager jobsManager, ApiService apiService, ApiConfig apiConfig)
         {
 
-            _jobsmanager = jobsManager;
+            _jobsManager = jobsManager;
 
-            // Call ApiServices to find PlanSwift -- using threads //
+            _apiService = apiService;
+
+            _apiConfig = apiConfig;
 
 
-           apiService = new ApiService
-
-           
-           
-           
-            {
-                CancellationTokenSource = new CancellationTokenSource()
-            };
-
-            Thread thread0 = new Thread(() => apiService.PlanSwiftApiConect(apiService.CancellationTokenSource.Token));
-            thread0.Start();
-
-            Thread thread1 = new Thread(() => apiService.IsRunCurrent(apiService.CancellationTokenSource.Token));
-            thread1.Start();
-
-            PlanSwift _planSwift = apiService.PlanSwiftApi;
         }
 
 
 
-        // Clean memory App break all threads and app memory for optimize and liberate all ram and close definitly the program // 
-        public void CleanMemory()
-        {
-            apiService.CancellationTokenSource.Cancel();
 
-            Console.WriteLine("cerrando");
-        }
     }
 }

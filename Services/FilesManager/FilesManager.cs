@@ -13,23 +13,23 @@ using System.Collections.Generic;
 
 namespace PlanSwiftApi.Services
 {
-    public class JobsManager : IJobsManager
+    public class FilesManager : IFilesManager
     {
         public bool PathFound { get; private set; }
 
 
 
-        public JobsManager()
+        public FilesManager()
         {
             return;
         }
 
         public List<string> FindStorages()
         {
-            string[] stgs = null;
-            int i = 0;
+            string[] stgs;
 
             List<string> storages = new List<string>();
+            List<string> aux = new List<string>();
 
             string storagesPath = Constants.DefaultPath;
             if (Directory.Exists(storagesPath))
@@ -39,25 +39,23 @@ namespace PlanSwiftApi.Services
 
                 PathFound = true;
 
-
-
-
                 foreach (var st in stgs)
                 {
+                    var storage = Path.GetFileName(st);
 
-                    int n = st.LastIndexOf("\\");
-                    var storage = st.Substring(n + 1);
-
-                    storages.Add(storage);
-                    i++;
+                    if (storage.ToLowerInvariant().Trim() == "local")
+                        storages.Add(storage);
+                    else
+                        aux.Add(storage);
                 }
-                
+
+                storages.AddRange(aux);
             }
             else
             {
 
                 PathFound = false;
-                //Function to select other folder path
+                //Function to select another folder path
 
 
             }
@@ -167,7 +165,7 @@ namespace PlanSwiftApi.Services
 
             string storagePath = storages[0] + "\\jobs\\" + jobName;
 
-            string jobPath = Path.Combine(teamSwiftPath, "jobs", jobName + $"{i.ToString("D3")}");
+            string jobPath = Path.Combine(teamSwiftPath, "jobs", jobName + $"{i:D3}");
 
 
             Console.WriteLine(jobName);
@@ -176,7 +174,7 @@ namespace PlanSwiftApi.Services
                 while (Directory.Exists(jobPath))
                 {
                     i++;
-                    jobPath = Path.Combine(teamSwiftPath, "jobs", jobName + $"{i.ToString("D3")}");
+                    jobPath = Path.Combine(teamSwiftPath, "jobs", jobName + $"{i:D3}");
 
                 }
 

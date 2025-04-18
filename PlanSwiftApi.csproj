@@ -77,9 +77,10 @@
     <Compile Include="Config\WindowsConfig\SplashWindowConfig.cs" />
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Resources\Animations\WindowAnimations.cs" />
+    <Compile Include="Config\ApiConfig.cs" />
     <Compile Include="Services\Api\IApiService.cs" />
-    <Compile Include="Services\JobsManager\IJobsManager.cs" />
-    <Compile Include="Services\JobsManager\JobsManager.cs" />
+    <Compile Include="Services\FilesManager\IFilesManager.cs" />
+    <Compile Include="Services\FilesManager\FilesManager.cs" />
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>

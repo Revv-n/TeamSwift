@@ -27,17 +27,20 @@
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="2.5*" />
                 </Grid.RowDefinitions>
 
 
-
+                <!--Storages Design-->
 
                 <Border
                     Margin="5"
                     Background="#998A8A8A"
-                    CornerRadius="25">
+                    CornerRadius="25"
+                    Grid.Row="0">
                     <Grid Grid.Row="0">
+
+
 
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50" />
@@ -46,29 +49,46 @@
 
 
                         <Grid Grid.Row="0" Grid.Column="0">
+
+
+
+
                             <TextBlock
-                                Margin="20,30,20,0"
+                                Margin="20,10,10,0"
                                 FontFamily="Global User Interface"
-                                FontSize="14"
+                                FontSize="20"
                                 FontWeight="Bold"
                                 Foreground="white"
-                                Text="Storeages" />
+                                Text="Storeages"/>
+
+
+                            <Border BorderThickness="0 0 0 2"
+                                    BorderBrush="white"
+                                    Margin="0,0,0,10"
+                                    >
+
+
+                                <Border.Effect>
+                                    <DropShadowEffect 
+                                    Color="Black" 
+                                    BlurRadius="5" 
+                                    ShadowDepth="3" 
+                                    Opacity="0.5"
+                                    Direction="270"/>
+                                </Border.Effect>
+
+                            </Border>
+    
                         </Grid>
-
-
-
 
 
 
                         <Grid Grid.Row="1" Grid.Column="1">
                             <Grid Margin="20,5,20,20">
                                 <ScrollViewer
-                                    x:Name="ScrollViewer"
+                                    x:Name="ScrollStorages"
                                     HorizontalScrollBarVisibility="Disabled"
                                     PanningMode="VerticalOnly"
-                                    PreviewMouseDown="ScrollViewer_MouseDown"
-                                    PreviewMouseMove="ScrollViewer_MouseMove"
-                                    PreviewMouseUp="ScrollViewer_MouseUp"
                                     VerticalScrollBarVisibility="Hidden">
 
 
@@ -80,27 +100,86 @@
 
                                     </StackPanel>
 
-                                    
+
                                 </ScrollViewer>
 
                             </Grid>
                         </Grid>
 
-
-
-
-
                     </Grid>
                 </Border>
 
+                
+                <!--Jobs Design-->
+                
+                <Border
+                    Margin="5"
+                    Background="#998A8A8A"
+                    CornerRadius="25"
+                    Grid.Row="1">
+                    
+                    
+                            <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
 
 
-                <Grid Grid.Row="1">
-                    <Border
-                        Margin="5"
-                        Background="#998A8A8A"
-                        CornerRadius="25" />
-                </Grid>
+                            <Grid Grid.Row="0" Grid.Column="0">
+
+
+                                
+                                
+                                <TextBlock
+                                        Margin="20, 15,10,0"
+                                        FontFamily="Global User Interface"
+                                        FontSize="26"
+                                        FontWeight="Bold"
+                                        Foreground="white"
+                                        Text="Jobs" />
+                            </Grid>
+
+                            <Border BorderThickness="0 0 0 2"
+                                        BorderBrush="white"
+                                        >
+
+
+                                <Border.Effect>
+                                    <DropShadowEffect 
+                                        Color="Black" 
+                                        BlurRadius="5" 
+                                        ShadowDepth="3" 
+                                        Opacity="0.5"
+                                        Direction="270"/>
+                                </Border.Effect>
+
+                            </Border>
+
+                        <ScrollViewer
+                                    x:Name="ScrollJobs"
+                                    HorizontalScrollBarVisibility="Disabled"
+                                    PanningMode="VerticalOnly"
+                                    VerticalScrollBarVisibility="Hidden">
+
+
+
+
+
+
+                            <StackPanel x:Name="JobsPanel">
+
+                            </StackPanel>
+
+
+                        </ScrollViewer>
+
+
+                    </Grid>
+
+                </Border>
+
+
 
             </Grid>
 
