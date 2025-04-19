@@ -10,6 +10,7 @@ using System.Xml.XPath;
 using System.Data.SqlTypes;
 using System.Windows.Documents;
 using System.Collections.Generic;
+using PlanSwiftApi.Helpers;
 
 namespace PlanSwiftApi.Services
 {
@@ -17,10 +18,13 @@ namespace PlanSwiftApi.Services
     {
         public bool PathFound { get; private set; }
 
+        JsonManager _jsonManager;
 
 
-        public FilesManager()
+        public FilesManager(JsonManager jsonManager)
         {
+
+            _jsonManager = jsonManager;
             return;
         }
 
@@ -31,7 +35,7 @@ namespace PlanSwiftApi.Services
             List<string> storages = new List<string>();
             List<string> aux = new List<string>();
 
-            string storagesPath = Constants.DefaultPath;
+            string storagesPath = _jsonManager.GetConfigs() + Constants.Storages;
             if (Directory.Exists(storagesPath))
             {
                 Console.WriteLine("se encontro el path");

@@ -9,7 +9,7 @@ using System.Windows.Navigation;
 
 namespace PlanSwiftApi.Helpers
 {
-    internal class JsonManager
+    public class JsonManager
     {
 
         public string GetConfigs()
@@ -31,9 +31,13 @@ namespace PlanSwiftApi.Helpers
                     config.TryGetValue("Configs", out var nested) &&
                     nested.TryGetValue("Path", out var path))
                 {
+                    Console.WriteLine("Extraer storage path", path);
                     return path;
+
                 }
             }
+
+           
             return Constants.DefaultPath;
         }
 

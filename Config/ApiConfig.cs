@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 using System.Collections.Generic;
+using PlanSwiftApi.Helpers;
 
 namespace PlanSwiftApi.ApiConfigs
 {
@@ -14,13 +15,17 @@ namespace PlanSwiftApi.ApiConfigs
     {
         private readonly ApiService _apiService;
 
-        public ApiConfig(ApiService apiService)
+        private readonly JsonManager _jsonManager;
+
+        public ApiConfig(JsonManager jsonManager, ApiService apiService)
         {
 
 
 
 
             _apiService = apiService;
+
+            _jsonManager = jsonManager;
 
             _apiService.CancellationTokenSource = new CancellationTokenSource();
 
@@ -99,6 +104,8 @@ namespace PlanSwiftApi.ApiConfigs
                         File.WriteAllText(jsonPath, json);
                         Console.WriteLine("Archivo JSON con estructura creado correctamente." + jsonPath);
 
+                        
+
 
                     }
                     catch (Exception ex)
@@ -109,7 +116,11 @@ namespace PlanSwiftApi.ApiConfigs
                 }else
                 {
                     Console.WriteLine("ℹ️ El archivo de configuración ya existe: " + jsonPath);
+
+                    
                 }
+
+                
 
 
             };
@@ -119,6 +130,8 @@ namespace PlanSwiftApi.ApiConfigs
 
 
         }
+
+
 
         public void CleanMemory()
         {

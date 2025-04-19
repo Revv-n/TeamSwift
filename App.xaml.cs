@@ -10,6 +10,7 @@ using PlanSwiftApi.Views;
 using PlanSwiftApi.Config;
 using PlanSwiftApi.Config.WindowsConfig;
 using PlanSwiftApi.ApiConfigs;
+using PlanSwiftApi.Helpers;
 
 
 namespace PlanSwiftApi
@@ -31,6 +32,7 @@ namespace PlanSwiftApi
             services.AddSingleton<MainWindow>();
             services.AddSingleton<ApiService>();
             services.AddSingleton<ApiConfig>();
+            services.AddSingleton<JsonManager>();
 
             ServiceProvider = services.BuildServiceProvider();
 

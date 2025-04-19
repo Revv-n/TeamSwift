@@ -98,6 +98,7 @@
     </ApplicationDefinition>
     <Compile Include="Config\WindowsConfig\SplashWindowConfig.cs" />
     <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\JsonManager.cs" />
     <Compile Include="Resources\Animations\WindowAnimations.cs" />
     <Compile Include="Config\ApiConfig.cs" />
     <Compile Include="Services\Api\IApiService.cs" />
@@ -205,6 +206,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\story.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitattributes" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
