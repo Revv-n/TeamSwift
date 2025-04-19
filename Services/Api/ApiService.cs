@@ -25,6 +25,7 @@ namespace PlanSwiftApi.Services
         public ManualResetEvent Bucle0Completed { get; private set; }
 
         public event Action OnPlanSwiftClose;
+        public event Action CreateConfig;
 
 
         public ApiService()
@@ -40,10 +41,14 @@ namespace PlanSwiftApi.Services
                 {
                     if (Process.GetProcessesByName("PlanSwift").Length > 0) // seraching the PlanSwift proces to verify planSwift is open //
                     {
+                        
                         Thread.Sleep(5000); // optimize Memory and correctly opening PlanSwift whaiting ones seconds //
                         _planSwift = new PlanSwift(); // Stablish Conection //
                         Console.WriteLine("PlanSwift Conected"); // verify in console //
                         Bucle0Completed.Set(); // Bucle is ok and finish, flag to bucle1 start //
+                        CreateConfig?.Invoke();
+                        
+                        
                         break;
                     }
                     else
@@ -81,6 +86,7 @@ namespace PlanSwiftApi.Services
                     {
                          // verify PlanSwift is run current
                         _loaded = true;
+
                     }
 
 
@@ -99,6 +105,8 @@ namespace PlanSwiftApi.Services
             }return _loaded;
 
         }
+
+
 
     }
 }

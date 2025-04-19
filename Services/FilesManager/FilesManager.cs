@@ -95,46 +95,50 @@ namespace PlanSwiftApi.Services
         public void FindJobPath()
         {
 
-
+            
 
             string path = "C:\\Program Files (x86)\\PlanSwift11\\Data\\Storages\\New FolderStorage\\Data.xml";
 
-            XmlDocument doc = new XmlDocument();
+            if(path != "C:\\Program Files (x86)\\PlanSwift11\\Data\\Storages\\Local\\Data.xml")
+            {
+                XmlDocument doc = new XmlDocument();
 
 
 
-            
-            doc.Load(path); 
+
+                doc.Load(path);
 
 
 
-            XmlNode nodo = doc.SelectSingleNode("/Item");
+                XmlNode nodo = doc.SelectSingleNode("/Item");
 
-            if (nodo != null) {
-
-            XmlNodeList properties = doc.SelectNodes("/Item/Properties/Property");
-
-
-                if (properties != null)
+                if (nodo != null)
                 {
-                    foreach (XmlNode property in properties)
+
+                    XmlNodeList properties = doc.SelectNodes("/Item/Properties/Property");
+
+
+                    if (properties != null)
                     {
-                        if (property.Attributes != null)
+                        foreach (XmlNode property in properties)
                         {
-
-                            string propertyName = property.Attributes["Name"]?.Value ?? "Sin nombre";
-                            string propertyValue = property.InnerText.Trim();
-
-                            if (propertyName == "Folder")
+                            if (property.Attributes != null)
                             {
-                                Console.WriteLine(propertyValue);
+
+                                string propertyName = property.Attributes["Name"]?.Value ?? "Sin nombre";
+                                string propertyValue = property.InnerText.Trim();
+
+                                if (propertyName == "Folder")
+                                {
+                                    Console.WriteLine(propertyValue);
+                                }
                             }
-
-
                         }
                     }
                 }
             }
+
+            
 
 
 
